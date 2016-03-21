@@ -1,0 +1,661 @@
+﻿ Download | Windows Embedded POSReady 2009    var initialSelectedSubMenuID = 
+"subNavItem"; var initialSelectedSubMenu = null; var hoverSelectedSubMenu = 
+null; var evt = null; $(document).ready(function () { /*code for nav items 
+highlighten*/ var currentUrl = window.location.href; var linkparts = 
+currentUrl.split('/'); var filename = linkparts[linkparts.length - 1]; var 
+selectedurl1 = $('ul li.both a[href="' + filename + '"]'); 
+$(selectedurl1).addClass('navSelected'); /*BreadCrumb code for subpages*/ var 
+titlename = $('head title').text(); var arr = titlename.split('|'); titlename = 
+arr[0]; if (filename == "windows-embedded-8-industry.aspx" || filename == 
+"windows-embedded-8-pro.aspx" || filename == "windows-embedded-8-standard.aspx" 
+|| filename == "windows-embedded-8-handheld.aspx") { 
+$('.we_mainHeaderBreadCrumbs').append("<div class='we_breadcrumbsTable' 
+style='font-size: 12px;'></div>") if (filename != 
+'windows-embedded-8-handheld.aspx') $('.we_breadcrumbsTable').append("<a 
+onclick='' href='windows-embedded-8.aspx' target='_self'>Windows Embedded 8</a> 
+> " +titlename +" "); else $('.we_breadcrumbsTable').append("<a onclick='' 
+href='windows-embedded-8.aspx' target='_self'>Windows Embedded 8</a> > Windows 
+Embedded 8 Handheld"); } if (filename == "windows-embedded-enterprise-7.aspx" || 
+filename == "windows-embedded-standard-7.aspx" || filename == 
+"windows-embedded-posready-7.aspx") { 
+$('.we_mainHeaderBreadCrumbs').append("<div class='we_breadcrumbsTable' 
+style='font-size: 12px;'></div>") if (filename != 
+'windows-embedded-posready-7.aspx') $('.we_breadcrumbsTable').append("<a 
+onclick='' href='windows-embedded-7.aspx' target='_self'>Windows Embedded 7</a> 
+> " + titlename + " "); else $('.we_breadcrumbsTable').append("<a onclick='' 
+href='windows-embedded-7.aspx' target='_self'>Windows Embedded 7</a> > Windows 
+Embedded 7 POSReady"); } if (filename == "windows-embedded-compact-7.aspx") { 
+$('.we_mainHeaderBreadCrumbs').append("<div class='we_breadcrumbsTable' 
+style='font-size: 12px;'></div>") $('.we_breadcrumbsTable').append("<a 
+onclick='' href='products-solutions-overview.aspx' target='_self'>Windows 
+Embedded Products</a> > " + titlename + " "); } if (filename == 
+"windows-embedded-handheld-6-5.aspx" || filename == 
+"windows-server-2008-for-embedded-systems.aspx") { 
+$('.we_mainHeaderBreadCrumbs').append("<div class='we_breadcrumbsTable' 
+style='font-size: 12px;'></div>") if (filename == 
+"windows-embedded-handheld-6-5.aspx") $('.we_breadcrumbsTable').append("<a 
+onclick='' href='legacy-products.aspx' target='_self'>Other Products</a> > " + 
+titlename + " "); else $('.we_breadcrumbsTable').append("<a onclick='' 
+href='legacy-products.aspx' target='_self'>Other Products</a> > Windows Server 
+2008 for Embedded Systems "); } function subNavShowing() { var NavIDS = 
+$(selectedurl1).attr('id'); if (NavIDS != null) { NavIDS = 
+NavIDS.replace("topNav", "subNavItem"); NavIDS = 
+document.getElementById(NavIDS); if (NavIDS != null) { NavIDS.style.display = 
+"block"; } } ///*code to show subnav once we are in subpage*/ var selectedurl = 
+$('ul.sub-nav li a[href="' + filename + '"]'); var navID = 
+$(selectedurl).parent().attr('id'); if (navID != null) { navID = 
+navID.replace("subNav", "subNavItem"); navID = document.getElementById(navID); 
+navID.style.display = "block"; } if (filename == "windows-embedded-8.aspx" || 
+filename == "windows-embedded-8-industry.aspx" || filename == 
+"windows-embedded-8-pro.aspx" || filename == "windows-embedded-8-standard.aspx" 
+|| filename == "windows-embedded-8-handheld.aspx" || filename == 
+"windows-embedded-compact-2013.aspx" || filename == 
+"windows-embedded-automotive-7.aspx" || filename == 
+"windows-server-2012-for-embedded-systems.aspx" || filename == 
+"microsoft-sql-server-2014-for-embedded-systems.aspx" || filename == 
+"windows-embedded-7.aspx" || filename == "windows-embedded-enterprise-7.aspx" || 
+filename == "windows-embedded-standard-7.aspx" || filename == 
+"windows-embedded-posready-7.aspx" || filename == "legacy-products.aspx" || 
+filename == "windows-embedded-compact-7.aspx" || filename == 
+"windows-embedded-handheld-6-5.aspx" || filename == 
+"windows-server-2008-for-embedded-systems.aspx" || filename == 
+"microsoft-sql-server-2012-for-embedded-systems.aspx") { 
+$('a#topNav5').addClass('navSelected'); $('ul#subNavItem5').css("display", 
+"block") $('li#subNav5:first-child a').addClass('navSelected'); } if 
+(currentUrl.indexOf("downloads") >= 0) { $('a#topNav5').addClass('navSelected'); 
+$('ul#subNavItem5').css("display", "block") $('li#subNav5:nth-child(3) 
+a').addClass('navSelected'); } } subNavShowing(); /*download a free trail page 
+subnav functionality */ if (currentUrl.indexOf("downloads") >= 0) { 
+$('a#topNav5').addClass('navSelected'); $('ul#subNavItem5').css("display", 
+"block") $('li#subNav5:nth-child(3) a').addClass('navSelected'); } /*to show 
+main nav item also slected*/ var MainNavid = 
+$(selectedurl1).parent().attr('id'); if (MainNavid != null) { MainNavid = 
+MainNavid.replace("subNav", "topNav") $('#' + 
+MainNavid).addClass('navSelected'); } /*hover functionality*/ 
+initialSelectedSubMenu = document.getElementById(initialSelectedSubMenuID); 
+$('#nav li').hover(function (e) { var myID = this.firstChild.id; myID = 
+myID.replace("topNav", "subNavItem"); var subMenuToShow = hoverSelectedSubMenu = 
+document.getElementById(myID); $('ul.sub-nav').css("display","none"); if 
+(initialSelectedSubMenu != subMenuToShow) { if (initialSelectedSubMenu != null) 
+{ initialSelectedSubMenu.style.display = "none"; } subMenuToShow.style.display = 
+"block"; } }, function (e) { var myID2 = this.firstChild.id; myID2 = 
+myID2.replace("topNav", "subNavItem"); var subMenuToHide = 
+document.getElementById(myID2); if (subMenuToHide != null) { var x = 
+window.event == null ? e.clientX : window.event.clientX; var y = window.event == 
+null ? e.clientY : window.event.clientY; var elementMouseIsOver = 
+document.elementFromPoint(x, y); if (initialSelectedSubMenu != subMenuToHide && 
+elementMouseIsOver.className != "sub-nav") { if (initialSelectedSubMenu != null) 
+{ initialSelectedSubMenu.style.display = "block"; } subMenuToHide.style.display 
+= "none"; hoverSelectedSubMenu = null; subNavShowing(); } } else { 
+subNavShowing(); } }); $('.sub-nav').hover(function () { // mouseover }, 
+function () { if (initialSelectedSubMenu != hoverSelectedSubMenu && 
+hoverSelectedSubMenu != null) { if (initialSelectedSubMenu != null) { 
+initialSelectedSubMenu.style.display = "block"; } 
+hoverSelectedSubMenu.style.display = "none"; } subNavShowing(); }); 
+$(document).mousemove(function (e) { evt = e; }); /*nav Higlight for 
+products-solutions-overview subpages*/ if (filename == "windows-embedded-8.aspx" 
+|| filename == "windows-embedded-8-industry.aspx" || filename == 
+"windows-embedded-8-pro.aspx" || filename == "windows-embedded-8-standard.aspx" 
+|| filename == "windows-embedded-8-handheld.aspx" || filename == 
+"windows-embedded-compact-2013.aspx" || filename == 
+"windows-embedded-automotive-7.aspx" || filename == 
+"windows-server-2012-for-embedded-systems.aspx" || filename == 
+"microsoft-sql-server-2014-for-embedded-systems.aspx" || filename == 
+"windows-embedded-7.aspx" || filename == "windows-embedded-enterprise-7.aspx" || 
+filename == "windows-embedded-standard-7.aspx" || filename == 
+"windows-embedded-posready-7.aspx" || filename == "legacy-products.aspx" || 
+filename == "windows-embedded-compact-7.aspx" || filename == 
+"windows-embedded-handheld-6-5.aspx" || filename == 
+"windows-server-2008-for-embedded-systems.aspx" || filename == 
+"microsoft-sql-server-2012-for-embedded-systems.aspx") { 
+$('a#topNav5').addClass('navSelected'); $('ul#subNavItem5').css("display", 
+"block") $('li#subNav5:first-child a').addClass('navSelected'); } }); function 
+setEvt(myEvent) { //evt = myEvent; //window.status = evt.clientX; }           v
+ar pagesDataLayer = { "global": { "data": { "urlstub": "NA", "tags": [ { 
+"content": "Share>Facebook", "endaction": "Share", "eaname": "WE FB", "eaoffer": 
+"Social Media", "gated": "no" }, { "content": "Share>Twitter", "endaction": 
+"Share", "eaname": "WE TW", "eaoffer": "Social Media", "gated": "no" }, { 
+"content": "Share>LinkedIn", "endaction": "Share", "eaname": "WE IN", "eaoffer": 
+"Social Media", "gated": "no" }, { "content": "Share>email", "endaction": 
+"Share", "eaname": "WE EM", "eaoffer": "Social Media", "gated": "no" } ] } }, 
+"home": { "data": { "urlstub": "en-us/windows-embedded.aspx", "tags": [ { 
+"content": "Watch Microsoft’s vision for IoT", "endaction": "Play", "eaname": 
+"Watch Microsoft’s vision for IoT", "eaoffer": "Video", "gated": "no" } ] } }, 
+"productssolutions": { "data": { "urlstub": 
+"en-us/products-solutions-overview.aspx", "tags": [ { "content": "Article: 
+Microsoft Drives Agile Approach to Intelligent Systems", "endaction": "Refer", 
+"eaname": "Article: Microsoft Drives Agile Approach to Intelligent Systems", 
+"eaoffer": "Website ", "gated": "no" }, { "content": "Video>Customer Success 
+Story", "endaction": "Play", "eaname": "Syndicat Mixte Autolib’ ", "eaoffer": 
+"video ", "gated": "no" }, { "content": "Video>Other videos", "endaction": 
+"Play", "eaname": "Hilton", "eaoffer": "video ", "gated": "no" }, { "content": 
+"Video>Other videos", "endaction": "Play", "eaname": "South Jersey", "eaoffer": 
+"video ", "gated": "no" }, { "content": "Read the information about Windows 
+embedded product", "endaction": "View", "eaname": "Windows Embedded 8.1 
+Industry", "eaoffer": "Product Information", "gated": "no" }, { "content": "Read 
+the information about Windows embedded product", "endaction": "View", "eaname": 
+"Windows Embedded 8.1 Pro", "eaoffer": "Product Information", "gated": "no" }, { 
+"content": "Read the information about Windows embedded product", "endaction": 
+"View", "eaname": "Windows Embedded 8 Standard", "eaoffer": "Product 
+Information", "gated": "no" }, { "content": "Read the information about Windows 
+embedded product", "endaction": "View", "eaname": "Windows Embedded 8.1 
+Handheld", "eaoffer": "Product Information", "gated": "no" }, { "content": "Read 
+the information about Windows embedded product", "endaction": "View", "eaname": 
+"Windows Embedded Compact 2013", "eaoffer": "Product Information", "gated": "no" 
+}, { "content": "Read the information about Windows embedded product", 
+"endaction": "View", "eaname": "Windows Embedded Compact 7", "eaoffer": "Product 
+Information", "gated": "no" }, { "content": "Read the information about Windows 
+embedded product", "endaction": "View", "eaname": "Windows Server 2012 R2 for 
+Embedded Systems", "eaoffer": "Product Information", "gated": "no" }, { 
+"content": "Read the information about Windows embedded product", "endaction": 
+"View", "eaname": "Microsoft SQL Server 2014 for Embedded Systems", "eaoffer": 
+"Product Information", "gated": "no" }, { "content": "Read the information about 
+Windows embedded product", "endaction": "View", "eaname": "Windows Embedded 
+Enterprise 7", "eaoffer": "Product Information", "gated": "no" }, { "content": 
+"Read the information about Windows embedded product", "endaction": "View", 
+"eaname": "Windows Embedded Standard 7", "eaoffer": "Product Information", 
+"gated": "no" }, { "content": "Read the information about Windows embedded 
+product", "endaction": "View", "eaname": "Windows Embedded POSReady 7", 
+"eaoffer": "Product Information", "gated": "no" }, { "content": "Read the 
+information about Windows embedded product", "endaction": "View", "eaname": 
+"Windows Embedded Handheld 6.5", "eaoffer": "Product Information", "gated": "no" 
+}, { "content": "Read the information about Windows embedded product", 
+"endaction": "View", "eaname": "Windows Embedded Server", "eaoffer": "Product 
+Information", "gated": "no" }, { "content": "Read the information about Windows 
+embedded product", "endaction": "View", "eaname": "Microsoft SQL Server", 
+"eaoffer": "Product Information SQL Server", "gated": "no" } ] } }, "downloads": 
+{ "data": { "urlstub": "en-us/downloads.aspx", "tags": [ { "content": "Windows 
+Embedded 8.1 Pro", "endaction": "Refer", "eaname": "get the OPK", "eaoffer": 
+"Website", "gated": "no" }, { "content": "Windows Embedded 8 Standard", 
+"endaction": "Download", "eaname": "register to get the Windows Embedded 8 
+product keys", "eaoffer": "Software Trial", "gated": "no" }, { "content": 
+"Windows Embedded 8 Standard", "endaction": "Download", "eaname": "register to 
+download Windows Embedded 8 Standard", "eaoffer": "Software Trial", "gated": 
+"no" }, { "content": "Windows Embedded 8.1 Industry", "endaction": "Download", 
+"eaname": "Register to download the Windows Embedded 8.1 Industry Evaluation and 
+get the product key", "eaoffer": "Software Trial", "gated": "no" }, { "content": 
+"Windows Embedded 8.1 Handheld", "endaction": "Download", "eaname": "Download 
+the Windows Embedded 8.1 SDK.", "eaoffer": "Software Trial", "gated": "no" }, { 
+"content": "System Center 2012 SP1", "endaction": "Download", "eaname": 
+"Download System Center 2012", "eaoffer": "Software Trial", "gated": "no" }, { 
+"content": "Windows Embedded Compact 2013", "endaction": "Download", "eaname": 
+"Windows Embedded Compact 2013.", "eaoffer": "Software Trial", "gated": "no" }, 
+{ "content": "Windows Embedded Compact 7", "endaction": "Download", "eaname": 
+"Register to get the product key and download the Windows Embedded Compact 7 
+evaluation", "eaoffer": "Software Trial", "gated": "no" }, { "content": "Windows 
+Server 2012 R2 for Embedded Systems", "endaction": "Download", "eaname": 
+"Download the Windows Server 2012 R2 Evaluation", "eaoffer": "Software Trial", 
+"gated": "no" }, { "content": "Microsoft SQL Server 2014 for Embedded Systems", 
+"endaction": "Download", "eaname": "Download the Microsoft SQL Server 2014 
+Evaluation ", "eaoffer": "Software Trial", "gated": "no" }, { "content": 
+"Windows Embedded Enterprise", "endaction": "Refer", "eaname": "get the OPK", 
+"eaoffer": "Website", "gated": "no" }, { "content": "Windows Embedded Standard 
+7", "endaction": "Download", "eaname": "Windows Embedded Standard 7 evaluation", 
+"eaoffer": "Software Trial", "gated": "no" }, { "content": "Windows Embedded 
+POSReady 7", "endaction": "Download", "eaname": "Register to get the product key 
+and link to the Windows Embedded POSReady 7 evaluation ", "eaoffer": "Software 
+Trial", "gated": "no" }, { "content": "Windows Server 2008 R2 for Embedded 
+Systems", "endaction": "Download", "eaname": "Download the Windows Server 2008 
+R2 with Service Pack 1 Evaluation", "eaoffer": "Software Trial", "gated": "no" 
+}, { "content": "Microsoft SQL Server 2012 for Embedded Systems", "endaction": 
+"Download", "eaname": "Download the Microsoft SQL Server 2012 Evaluation", 
+"eaoffer": "Software Trial", "gated": "no" }, { "content": "Windows Embedded 
+Standard 2009", "endaction": "Download", "eaname": "Register to get the product 
+key and link to the Windows Embedded Standard 2009 evaluation", "eaoffer": 
+"Software Trial", "gated": "no" }, { "content": "Windows Embedded POSReady 
+2009", "endaction": "Download", "eaname": "Register to get the product key and 
+link to the Windows Embedded POSReady 2009 evaluation", "eaoffer": "Software 
+Trial", "gated": "no" } ] } }, "developers": { "data": { "urlstub": 
+"en-us/developers.aspx", "tags": [ { "content": "Windows Embedded 8 Standard 
+Technical Documentation", "endaction": "Refer", "eaname": "Windows Embedded 8 
+Standard Technical Documentation", "eaoffer": "Website", "gated": "no" }, { 
+"content": "Windows Embedded 8 Industry Technical Documentation", "endaction": 
+"Refer", "eaname": "Windows Embedded 8 Industry Technical Documentation", 
+"eaoffer": "Website", "gated": "no" }, { "content": "Windows Embedded 8.1 
+Handheld SDK", "endaction": "Refer", "eaname": "Windows Embedded 8.1 Handheld 
+SDK", "eaoffer": "Website", "gated": "no" }, { "content": "Windows Embedded 8.1 
+Handheld administrators guide", "endaction": "Refer", "eaname": "Windows 
+Embedded 8.1 Handheld administrators guide", "eaoffer": "Website", "gated": "no" 
+}, { "content": "Windows Embedded 8.1 Handheld documentation", "endaction": 
+"Refer", "eaname": "Windows Embedded 8.1 Handheld documentation", "eaoffer": 
+"Website", "gated": "no" }, { "content": "Windows Server 2012 for Embedded 
+Systems Technical Documentation", "endaction": "Refer", "eaname": "Windows 
+Server 2012 for Embedded Systems Technical Documentation", "eaoffer": "Website", 
+"gated": "no" }, { "content": "Microsoft SQL Server for Embedded Systems 
+Technical Documentation", "endaction": "Refer", "eaname": "Microsoft SQL Server 
+for Embedded Systems Technical Documentation", "eaoffer": "Website", "gated": 
+"no" }, { "content": "Windows Embedded Compact 7 Technical Documentation", 
+"endaction": "Refer", "eaname": "Windows Embedded Compact 7 Technical 
+Documentation", "eaoffer": "Website", "gated": "no" }, { "content": "Windows 
+Embedded Compact 2013 Technical Documentation", "endaction": "Refer", "eaname": 
+"Windows Embedded Compact 2013 Technical Documentation", "eaoffer": "Website", 
+"gated": "no" }, { "content": "Windows Embedded Compact Updates", "endaction": 
+"Refer", "eaname": "Windows Embedded Compact Updates", "eaoffer": "Website", 
+"gated": "no" }, { "content": "Windows Embedded Compact Webinars", "endaction": 
+"Refer", "eaname": "Windows Embedded Compact Webinars", "eaoffer": "Website", 
+"gated": "no" }, { "content": "Windows Embedded Compact BSPs", "endaction": 
+"Refer", "eaname": "Windows Embedded Compact BSPs", "eaoffer": "Website", 
+"gated": "no" }, { "content": "Windows Embedded Compact Drivers", "endaction": 
+"Refer", "eaname": "Windows Embedded Compact Drivers", "eaoffer": "Website", 
+"gated": "no" }, { "content": "Windows Embedded Standard 7 Technical 
+Documentation", "endaction": "Refer", "eaname": "Windows Embedded Standard 7 
+Technical Documentation", "eaoffer": "Website", "gated": "no" }, { "content": 
+"Windows Embedded POSReady 7 Technical Documentation", "endaction": "Refer", 
+"eaname": "Windows Embedded POSReady 7 Technical Documentation", "eaoffer": 
+"Website", "gated": "no" }, { "content": "Windows Automotive Technical 
+Documentation", "endaction": "Refer", "eaname": "Windows Automotive Technical 
+Documentation", "eaoffer": "Website", "gated": "no" }, { "content": "Get answers 
+in the Windows Embedded forums", "endaction": "Refer", "eaname": "Get answers in 
+the Windows Embedded forums", "eaoffer": "Website", "gated": "no" }, { 
+"content": "Buy an MSDN subscription with Windows Embedded", "endaction": 
+"Refer", "eaname": "Buy an MSDN subscription with Windows Embedded", "eaoffer": 
+"Website", "gated": "no" }, { "content": "Get product information", "endaction": 
+"Refer", "eaname": "Get product information", "eaoffer": "Website", "gated": 
+"no" }, { "content": "Download the latest trials", "endaction": "Refer", 
+"eaname": "Download the latest trials", "eaoffer": "Website", "gated": "no" }, { 
+"content": "Learn about our support lifecycle", "endaction": "Refer", "eaname": 
+"Learn about our support lifecycle", "eaoffer": "Website", "gated": "no" }, { 
+"content": "Find a distributor", "endaction": "Refer", "eaname": "Find a 
+distributor", "eaoffer": "Website", "gated": "no" }, { "content": "Find a 
+partner", "endaction": "Refer", "eaname": "Find a partner", "eaoffer": 
+"Website", "gated": "no" } ] } }, "windowsembedded8pro": { "data": { "urlstub": 
+"en-us/windows-embedded-8-pro.aspx", "tags": [ { "content": "White paper: 
+Gartner on Windows 8 security", "endaction": "Download", "eaname": "White paper: 
+Gartner on Windows 8 security", "eaoffer": "White Paper", "gated": "Yes" } ] } 
+}, "windowsembedded8standard": { "data": { "urlstub": 
+"en-us/windows-embedded-8-standard.aspx", "tags": [ { "content": "Download the 
+data sheet", "endaction": "Download", "eaname": "Download the Windows Embedded 8 
+Standard data sheet", "eaoffer": "Product Information", "gated": "no" }, { 
+"content": "Forrester blog, \"The Future Of Microsoft .NET: New Options, New 
+Choices, New Risks\"", "endaction": "Refer", "eaname": "Forrester blog, \"The 
+Future Of Microsoft .NET: New Options, New Choices, New Risks\"" , "eaoffer": 
+"Website", "gated": "Yes" }, { "content": "White paper: Gartner on Windows 8 
+security", "endaction": "Download", "eaname": "White paper: Gartner on Windows 8 
+security", "eaoffer": "White Paper", "gated": "Yes" } ] } }, 
+"windowsembedded8industry": { "data": { "urlstub": 
+"en-us/windows-embedded-8-industry.aspx", "tags": [ { "content": "Download the 
+data sheet", "endaction": "Download", "eaname": "Download the Windows Embedded 8 
+Industry data sheet", "eaoffer": "Product Information", "gated": "no" }, { 
+"content": "White paper: Gartner on 2012 trends in human-computer interaction", 
+"endaction": "Download", "eaname": "White paper: Gartner on 2012 trends in 
+human-computer interaction", "eaoffer": "White Paper", "gated": "Yes" }, { 
+"content": "White paper: Gartner on Windows 8 security", "endaction": 
+"Download", "eaname": "White paper: Gartner on Windows 8 security", "eaoffer": 
+"White Paper", "gated": "Yes" }, { "content": "Register to download the Windows 
+Embedded 8.1 Industry Release Preview ", "endaction": "Download", "eaname": 
+"Windows Embedded 8.1 Industry Release Preview", "eaoffer": "Software Trial ", 
+"gated": "Yes" } ] } }, "windowsembedded7": { "data": { "urlstub": 
+"en-us/windows-embedded-7.aspx", "tags": [ { "content": "No End Actions", 
+"endaction": "", "eaname": "", "eaoffer": "", "gated": "" } ] } }, 
+"windowsembeddedenterprise7": { "data": { "urlstub": 
+"en-us/windows-embedded-enterprise-7.aspx", "tags": [ { "content": "Download the 
+data sheet", "endaction": "Download", "eaname": "Download the Windows Embedded 
+Enterprise data sheet", "eaoffer": "Product Information", "gated": "no" } ] } }, 
+"windowsembeddedstandard7": { "data": { "urlstub": 
+"en-us/windows-embedded-standard-7.aspx", "tags": [ { "content": "Download the 
+data sheet", "endaction": "Download", "eaname": "Download the Windows Embedded 
+Standard 7 data sheet", "eaoffer": "Product Information", "gated": "no" }, { 
+"content": "White Paper: Technical Overview ", "endaction": "Download", 
+"eaname": "White Paper: Technical Overview ", "eaoffer": "White Paper ", 
+"gated": "no" } ] } }, "windowsembeddedposready7": { "data": { "urlstub": 
+"en-us/windows-embedded-posready-7.aspx", "tags": [ { "content": "Download the 
+data sheet", "endaction": "Download", "eaname": "Download the Windows Embedded 
+POSReady7 data sheet", "eaoffer": "Product Information", "gated": "no" } ] } }, 
+"windowsembedded8handheld": { "data": { "urlstub": 
+"en-us/windows-embedded-8-handheld.aspx", "tags": [ { "content": "Download the 
+Windows Embedded 8.1 SDK", "endaction": "Download", "eaname": "Download the 
+Windows Embedded 8.1 SDK", "eaoffer": "Product Information", "gated": "no" }, { 
+"content": "White paper: Gartner on choosing Windows Mobile over Android", 
+"endaction": "Download", "eaname": "White paper: Gartner on choosing Windows 
+Mobile over Android", "eaoffer": "White Paper ", "gated": "Yes" }, { "content": 
+"White paper: J. Gold Associates on empowering mobile workers", "endaction": 
+"Download", "eaname": "White paper: J. Gold Associates on empowering mobile 
+workers", "eaoffer": "White Paper ", "gated": "Yes" } ] } }, 
+"windowsserver2012es": { "data": { "urlstub": 
+"en-us/windows-server-2012-for-embedded-systems.aspx", "tags": [ { "content": 
+"Download the data sheet", "endaction": "Download", "eaname": "Download the 
+Windows Server 2013 for Embedded Systems data sheet", "eaoffer": "Product 
+Information", "gated": "no" }, { "content": "Learn more about Windows Server 
+2012 R2", "endaction": "Refer", "eaname": "Learn more about Windows Server 2012 
+R2", "eaoffer": "Website", "gated": "no" } ] } }, "windowsembeddedcompact7": { 
+"data": { "urlstub": "en-us/windows-embedded-compact-7.aspx", "tags": [ { 
+"content": "Download the data sheet", "endaction": "Download", "eaname": 
+"Download the Windows Embedded Compact 7data sheet", "eaoffer": "Product 
+Information", "gated": "no" } ] } }, "windowsembeddedautomative7": { "data": { 
+"urlstub": "en-us/windows-embedded-automotive-7.aspx", "tags": [ { "content": 
+"Download the data sheet", "endaction": "Download", "eaname": "Download the 
+Windows Automotive 7 data sheet", "eaoffer": "Product Information", "gated": 
+"no" }, { "content": "White paper: Technical Companion", "endaction": 
+"Download", "eaname": "White paper: Technical Companion Windows Embedded 
+Automotive 7", "eaoffer": "White Paper", "gated": "no" }, { "content": "Top 
+Video", "endaction": "Play", "eaname": "Video: Designing the Future of the 
+Intelligent Car: Minimizing Distractions", "eaoffer": "Video", "gated": "no" }, 
+{ "content": "Bottom Video 1", "endaction": "Play", "eaname": "Video: Designing 
+the Future of the Intelligent Car: Glanceable Design", "eaoffer": "Video", 
+"gated": "no" }, { "content": "Bottom Video 2", "endaction": "Play", "eaname": 
+"Video: Designing the Future of the Intelligent Car: The Global Influence", 
+"eaoffer": "Video", "gated": "no" }, { "content": "Bottom Video 3", "endaction": 
+"Play", "eaname": "Video: Designing the Future of the Intelligent Car: The 
+Updateable Car", "eaoffer": "Video", "gated": "no" }, { "content": "Bottom Video 
+4", "endaction": "Play", "eaname": "Video: Designing the Future of the 
+Intelligent Car: User Experience", "eaoffer": "Video", "gated": "no" }, { 
+"content": "Bottom Video 5", "endaction": "Play", "eaname": "VVideo: Designing 
+the Future of the Intelligent Car: Experience Matters", "eaoffer": "Video", 
+"gated": "no" }, { "content": "Bottom Video 6", "endaction": "Play", "eaname": 
+"Video: Designing the Future of the Intelligent Car: The Driving Experience", 
+"eaoffer": "Video", "gated": "no" } ] } }, "microsoftsqlserver2012es": { "data": 
+{ "urlstub": "en-us/microsoft-sql-server-2012-for-embedded-systems.aspx", 
+"tags": [ { "content": "Download the data sheet", "endaction": "Download", 
+"eaname": "Microsoft SQL Server 2012 for Embedded Systems datasheet", "eaoffer": 
+"Product Information", "gated": "no" }, { "content": "Learn more about SQL 
+Server 2012", "endaction": "Refer", "eaname": "Learn more about SQL Server 
+2012", "eaoffer": "Website", "gated": "no" }, { "content": "White paper: IDG on 
+the launch of Microsoft SQL Server 2012", "endaction": "Download", "eaname": 
+"White paper: IDG on the launch of Microsoft SQL Server 2012", "eaoffer": "White 
+Paper ", "gated": "Yes" } ] } }, "customerstoriespage": { "data": { "urlstub": 
+"en-us/customer-stories.aspx", "tags": [ { "content": "White paper: Microsoft on 
+the business value of data", "endaction": "Download", "eaname": "White paper: 
+Microsoft on the business value of data", "eaoffer": "White Paper ", "gated": 
+"No" }, { "content": "Video: IDC’s Mario Morales on the rise of intelligent 
+systems", "endaction": "Play", "eaname": "Video: IDC’s Mario Morales on the rise 
+of intelligent systems", "eaoffer": "Video", "gated": "Yes" }, { "content": 
+"Video: Where is Windows Embedded?", "endaction": "Play", "eaname": "Video: 
+Where is Windows Embedded?", "eaoffer": "Video", "gated": "No" } ] } } }; var 
+customersDataLayer={ "customerstories": [ { "urlstub": 
+"en-us/windows-embedded.aspx?id={casestudyid}", "stories": [ { "content": "White 
+paper: Microsoft on the business value of data", "endAction": "Download", 
+"eaname": "White paper: Microsoft on the business value of data", "eaoffer": 
+"White Paper ", "gated": "No" }, { "content": "Video: IDC’s Mario Morales on the 
+rise of intelligent systems", "endAction": "Play", "eaname": "Video: IDC’s Mario 
+Morales on the rise of intelligent systems", "eaoffer": "Video", "gated": "Yes" 
+}, { "content": "Video: Where is Windows Embedded?", "endAction": "Play", 
+"eaname": "Video: Where is Windows Embedded?", "eaoffer": "Video", "gated": "No" 
+}, { "content": "View Customer Story", "endAction": "view", "eaname": 
+"{casestudyname}", "eaoffer": "Customer Story", "gated": "No" } ], 
+"storydetails": [ { "content": "Download our brochure of customer successes", 
+"endaction": "Download", "eaname": "brochure of customer successes", "eaoffer": 
+"White Paper", "gated": "no" }, { "content": "Read the article on the Windows 
+Embedded News Center", "endaction": "Refer", "eaname": "{casestudyname} news 
+center article", "eaoffer": "Website", "gated": "no" }, { "content": "Download 
+the Case Study", "endaction": "Download", "eaname": "{casestudyname} Case 
+Study", "eaoffer": "White Paper", "gated": "no" }, { "content": "Video", 
+"endaction": "Play", "eaname": "Video: {casestudyname} Case Study", "eaoffer": 
+"Video", "gated": "no" } ], "casestudies": [ { "id": "11", "casestudy": "AMI 
+Entertainment" }, { "id": "21", "casestudy": "Areva Multibrid GmbH" }, { "id": 
+"35", "casestudy": "BMW" }, { "id": "9", "casestudy": "Bravo Outdoor 
+Advertising" }, { "id": "12", "casestudy": "Carl's Jr." }, { "id": "42", 
+"casestudy": "China Minsheng" }, { "id": "31", "casestudy": "Cincinnati Reds" }, 
+{ "id": "45", "casestudy": "Coca-Cola Amatil" }, { "id": "28", "casestudy": 
+"Dongfeng Nissan" }, { "id": "18", "casestudy": "Douglas" }, { "id": "13", 
+"casestudy": "Family Dollar" }, { "id": "27", "casestudy": "Fast Retailing" }, { 
+"id": "36", "casestudy": "Fiat" }, { "id": "3", "casestudy": "Ford" }, { "id": 
+"15", "casestudy": "Giletta SpA" }, { "id": "38", "casestudy": "Great River 
+Medical Center" }, { "id": "23", "casestudy": "Hannover Medical School" }, { 
+"id": "44", "casestudy": "Henry Mayo Newhall Memorial Hospital" }, { "id": "10", 
+"casestudy": "Hillcrest Baptist Medical Center" }, { "id": "5", "casestudy": 
+"Jeroen Bosch Ziekenhuis" }, { "id": "17", "casestudy": "Kia" }, { "id": "20", 
+"casestudy": "Korail Tourservice" }, { "id": "7", "casestudy": "Kuka Robotics" 
+}, { "id": "39", "casestudy": "Lido Stone Works" }, { "id": "26", "casestudy": 
+"Nakajima USA" }, { "id": "16", "casestudy": "Nissan Leaf" }, { "id": "46", 
+"casestudy": "Orleans Parish Communication District" }, { "id": "37", 
+"casestudy": "Rockford Health System" }, { "id": "2", "casestudy": "Royal 
+Caribbean Cruise lines" }, { "id": "29", "casestudy": "Shanghai CHILO Press 
+Company" }, { "id": "41", "casestudy": "Siloah St. Trudpert Klinikum" }, { "id": 
+"24", "casestudy": "Sioux Falls Arena" }, { "id": "6", "casestudy": "South 
+Jersey Healthcare" }, { "id": "22", "casestudy": "State Grid of China" }, { 
+"id": "34", "casestudy": "Autolib" }, { "id": "8", "casestudy": "the 
+Co-operative" }, { "id": "4", "casestudy": "Hilton RSVP" }, { "id": "40", 
+"casestudy": "Tommy Hilfiger" }, { "id": "19", "casestudy": "University of 
+Colorado Hospital" }, { "id": "43", "casestudy": "Yonghe King" } ] } ] };   #
+wrapper #header #nav LI { list-style-type: none; } #wrapper #header .sub-nav LI 
+{ list-style-type: none; } .navSelected, .navSelected a { color: white 
+!important; } #nav { top: auto; left: auto; z-index: 11; } #nav li ul { 
+/*display: none;*/ /*visibility:hidden;*/ position: absolute; left: 0; height: 
+18px; } #nav li.selectedItem ul { /*visibility:visible;*/ } #nav li:hover ul { 
+/*visibility:visible;*/ } #nav li:hover a { text-decoration: none; } #nav 
+li:hover a span { color: #fff; } .heroButtons, .we_mainHeaderBreadCrumbs { 
+z-index: auto !important; } .fancybox-skin { padding: 0 !important; }  u
+l.sub-nav { /* modify style for home page */ left: 0px !important; }  
+.js-tab-hidden{position:absolute !important;left:-9999px !important;top:-9999px 
+!important;display:block 
+!important}#fancybox-overlay{position:fixed;top:0;left:0;}.fancybox-margin{margin-right:16px;}.jcf-unselectable{-moz-user-select:none;-webkit-tap-highlight-color:rgba(255,255,255,0);-webkit-user-select:none;user-select:none;} 
+
+ 
+
+ 
+
+
+
+
+
+.logo { background: 
+url(/windowsembedded/global/publishingimages/chrome/logo.png); } .microsoft-logo 
+{ background: 
+url(/windowsembedded/global/publishingimages/chrome/microsoftlogo.png) 
+no-repeat; }  function trackShareFb() { var shareFB = 
+encodeURIComponent('http://www.microsoft.com/windowsembedded/'); 
+setTimeout(function () { 
+window.open("https://www.facebook.com/sharer/sharer.php?u=" + shareFB, 
+"_blank"); }, 600); } function trackShareTwitter() { var shareTwitter = 
+encodeURIComponent('http://www.microsoft.com/windowsembedded/'); 
+setTimeout(function () { 
+window.open("https://twitter.com/intent/tweet?source=webclient&amp;text=" + 
+shareTwitter, "_blank"); }, 600); }  
+
+Microsoft  
+    
+    
+    
+    
+    
+   
+
+
+Windows Embedded
+  var weSite ="https://www.microsoft.com/en-us/search/result.aspx?q=";// 
+"search-results.aspx?st="; var shIsLoad = true; var shImageWidth = 0; var 
+selectedChoiceText = "Search Windows Embedded Sites"; function doSearch() { var 
+qu = document.getElementById('we_BSB_shBox').value; var thisPage = document.URL; 
+/* Strip off QS parameters if present */ var qs = thisPage.indexOf("?"); if (qs 
+> 0) { thisPage = thisPage.slice(0, qs); } if (qu != selectedChoiceText) { 
+dcsMultiTrack('DCS.dcsuri', 'searchresults', 'WT.ti', 'Onsite Search Button', 
+'WT.dl', '1', 'WT.z_srch_t', qu, 'DCSext.wtEvtSrc', thisPage, 
+'DCSext.wtNavigation', 'Onsite Search'); window.location.href = weSite + 
+encodeURIComponent(qu); } return; } function 
+onSearchBoxFocus(defaultSearchLabel) { var searchBoxInput = 
+document.getElementById("we_BSB_shBox"); if (shIsLoad == true) { shImageWidth = 
+0; shIsLoad = false; } if ((searchBoxInput.value == defaultSearchLabel) || 
+(searchBoxInput.value.replace(/(^\s*)|(\s*$)/g, '') == '')) { 
+searchBoxInput.value = ''; searchBoxInput.style.fontStyle = 'normal'; 
+searchBoxInput.style.color = '#000000'; } } function 
+onSearchBoxBlur(defaultSearchLabel) { var searchBoxInput = 
+document.getElementById("we_BSB_shBox"); if 
+(searchBoxInput.value.replace(/(^\s*)|(\s*$)/g, '') == '') { 
+searchBoxInput.style.fontStyle = 'Italic'; searchBoxInput.style.color = 
+"#a1a1a1"; searchBoxInput.value = defaultSearchLabel; } } var init = false; 
+$(document).ready(function () { $('#we_BSB_shBox').keypress(function (e) { if 
+(e.which == 13) { e.preventDefault(); doSearch(); } }); });  #we_searchContainer 
+{ }  
+
+
+
+ 
+ 
+  
+  Home
+  Internet of Things
+  Customer Success Stories
+  Products & Solutions
+  Partners
+  Community
+  Windows Embedded Products
+  Product Lifecycles
+  Downloads
+  Purchase
+   Windows IoT
+   Azure IoT
+  Find a Partner
+  Become a Partner
+  Technical References
+
+.mainHeading h1 { font-size:46px !important; } .space { padding-top: 13px; } 
+.spacebottom { margin-top:-21px;}  
+/*form mozilla margin Fix*/ @-moz-document url-prefix() { #we_mainHeader { 
+margin-top: -45px !important; } }  
+
+
+
+
+
+
+Windows Embedded POSReady 2009
+
+Thank you for registering to download Windows Embedded POSReady 2009. The trial 
+product key and link to the download are available below.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Trial Product Key
+
+Your trial product key for installing Windows Embedded POSReady 2009:
+
+ KFF8R-TMHF4-GKT2P-KGDHH-FXPMB 
+
+
+
+
+
+
+You will be asked to enter your trial product key during the installation 
+process. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Trial Product Download
+
+Download the evaluation copy of Windows Embedded POSReady 2009
+
+
+
+
+
+
+Improve your download experience
+
+  Download outside of standard work hours.
+
+
+  Use a fast internet connection.
+
+
+  Use the most recently released browser.
+
+  Use a download manager. 
+
+
+
+
+
+More Microsoft sites
+   Microsoft Windows 
+   Microsoft Office 
+   Windows Phone 
+   Xbox 
+   Skype 
+   Bing 
+   Microsoft Store 
+
+
+Information for
+  Enterprises
+  OEMs
+  Customer success stories
+  Current partners
+  Become a partner
+  Developers
+
+
+Get windows embedded
+  Try it
+  How to buy
+  Find a solution provider
+
+
+Support & resources
+  Product lifecycle support
+  Product support
+  Partner support
+  Microsoft support
+  Find a training partner
+  Technical references
+
+
+Stay Connected
+  Events
+  Microsoft’s IoT Blog
+  Microsoft IoT on YouTube
+  Microsoft IoT on Twitter
+  Developer Forum
+
+
+This site in other countries/regions 
+
+
+France - Français | Site map
+
+Deutschland - Deutsch | Site map
+
+United Kingdom - English | Site map
+
+中国 - 简体中文 | 站点地图
+
+日本 - 日本語 | サイト マップ
+ 
+
+
+
+
+
+United States - English
+ 
+  Site map
+  Contact us
+  Privacy and cookies
+  Terms of use
+  Trademarks
+ © 2015 Microsoft var divcountryList = 
+document.getElementById("divcountryList"); var divFooterHolder = 
+document.getElementById("divFooterHolder"); divcountryList.style.height = 
+(divFooterHolder.clientHeight - 38) + "px"; function toggleFooterCountryList() { 
+if (divFooterHolder.style.display == "none") { divFooterHolder.style.display = 
+""; divcountryList.style.display = "none"; } else { divcountryList.style.display 
+= ""; divFooterHolder.style.display = "none"; } }  var gDomain = 
+"m.webtrends.com"; var gDcsId = "dcsjwb9vb00000c932fd0rjc7_5p3t"; var 
+gTrackEvents = 1; var gFpc = "WT_FPC"; if (document.cookie.indexOf(gFpc + "=") 
+== -1) { document.write("<scr" + "ipt type='text/javascript' src='" + "http" + 
+(window.location.protocol.indexOf('https:') == 0 ? 's' : '') + "://" + gDomain + 
+"/" + gDcsId + "/wtid.js" + "'></scr" + "ipt>"); }  <img alt="" id="DCSIMG" 
+width="1" height="1" 
+src="http://m.webtrends.com/dcsjwb9vb00000c932fd0rjc7_5p3t/njs.gif?dcsuri=/nojavascript&amp;WT.js=No" 
+/>  
